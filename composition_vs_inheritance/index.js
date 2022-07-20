@@ -1,3 +1,19 @@
+function attacker({ name }) {
+    return {
+        atack: () => {
+            console.log(`${name} atacked`)
+        }
+    }
+}
+
+function wallker({ name }) {
+    return {
+        walk: () => {
+            console.log(`${name} walked`)
+        }
+    }
+}
+
 function swimmer({ name }) {
     return {
         swim: () => {
@@ -14,13 +30,10 @@ function flyer({ name }) {
     }
 }
 
-function atteckerAndWalker({ name }) {
+function poisioner({ name }) {
     return {
-        atack: () => {
-            console.log(`${name} atacked`)
-        },
-        walk: () => {
-            console.log(`${name} walked`)
+        poision: () => {
+            console.log(`${name} poisioned`)
         }
     }
 }
@@ -29,7 +42,7 @@ function monsterCreator(name) {
     const monster = {name: name}
     return {
         ...monster,
-        ...atteckerAndWalker(monster)
+        ...attacker(monster)
     }
 }
 
@@ -49,17 +62,26 @@ function flyingMonsterCreator(name) {
     }
 }
 
+function poisionMonsterCreator(name) {
+    const monster = {name: name}
+    return {
+        ...monsterCreator(name),
+        ...poisioner(monster)
+    }
+}
+
 
 const bear = monsterCreator('bear')
 bear.atack()
-bear.walk()
 
 const eagle = flyingMonsterCreator('eagle')
 eagle.atack()
-eagle.walk()
 eagle.fly()
 
 const shark = swimmingMonsterCreator('shark')
 shark.atack()
-shark.walk()
 shark.swim()
+
+const snake = poisionMonsterCreator('snake')
+snake.atack()
+snake.poision()
